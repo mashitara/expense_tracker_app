@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, session
 import mysql.connector
 
 app = Flask(__name__)
@@ -10,4 +10,22 @@ def index():
     if not in session:
         return redirect(url_for("login"))
 
-    return render_template("index.html")
+    conn = mysql.connector.connect(
+        host = "localhost",
+        user = "ms",
+        db = "expense_tracker",
+        password = ""
+    )
+
+    cursor = conn.cursor()
+
+    sql = "SELECT * FROM exepenses"
+
+    cursor.execute(sql)
+
+    tasks = cursor.fetchall()
+
+    conn.close()
+
+
+    return render_template("index.html", tasks=tasks)
