@@ -5,5 +5,22 @@
     </head>
     <body>
         <h2>家計簿アプリ</h2>
+        <form method="POST" action="/add" >
+            <input type="text" name="title" placeholder="タイトルを入力"><br>
+            <input type="text" name="amount" placeholder="金額を入力"><br>
+            <select name="category">
+                <option>食費</option>
+                <option>家賃</option>
+                <option>光熱費</option>
+                <option>交際費</option>
+                <option>その他</option>
+            </select>
+            <input type="submit" value="追加">
+        </form>
+        {% for task in tasks %}
+        <ul>
+            <li>{{ task[1] }} {{ task[2] }} {{ task[3] }}</li>
+        </ul>
+        {% endfor %}
     </body>
 </html>
